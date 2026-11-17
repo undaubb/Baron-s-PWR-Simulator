@@ -1312,7 +1312,21 @@ const UI = {
                 event.preventDefault();
                 Simulation.toggle();
             }
-            });
+        });
+
+        // Prevent accidentally closing site
+        window.addEventListener('beforeunload', (event) => {
+            let totalBlocks = 0;
+            for (const [key, value] of Object.entries(Reactor.stats.struct)) {
+                if (key != "rawConnections" && key != "controlledConnections") {
+                    totalBlocks += value;
+                }
+            }
+
+            if (totalBlocks > 0) {
+                return "Are you sure you want to leave?"
+            }
+        });
         
         // Sync Slider and Number Input
         const slider = document.getElementById('inp-control-slider');
