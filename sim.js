@@ -1322,9 +1322,9 @@ const UI = {
                     totalBlocks += value;
                 }
             }
-
+            
             if (totalBlocks > 0) {
-                return "Are you sure you want to leave?"
+                event.preventDefault();
             }
         });
         
